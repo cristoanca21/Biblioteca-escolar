@@ -12,15 +12,15 @@
 
     <div class="overflow-hidden bg-white dark:bg-neutral-900/50 border border-neutral-200 dark:border-neutral-800 rounded-xl shadow-sm">
       <div class="overflow-x-auto">
-        <table class="w-full border-collapse text-left text-sm">
+        <table class="w-full min-w-[800px] border-collapse text-left text-sm">
           <thead>
             <tr class="border-b border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400 font-semibold">
-              <th scope="col" class="px-6 py-4">Portada</th>
+              <th scope="col" class="px-6 py-4 w-24">Portada</th>
               <th scope="col" class="px-6 py-4">Título</th>
               <th scope="col" class="px-6 py-4">Autor</th>
-              <th scope="col" class="px-6 py-4">Año</th>
+              <th scope="col" class="px-6 py-4 w-24">Año</th>
               <th scope="col" class="px-6 py-4">Categoría</th>
-              <th scope="col" class="px-6 py-4 text-center">Acciones</th>
+              <th scope="col" class="px-6 py-4 text-right w-32">Acciones</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-neutral-200 dark:divide-neutral-800 text-neutral-700 dark:text-neutral-300">
@@ -36,7 +36,7 @@
               <td class="px-6 py-4 font-medium text-neutral-900 dark:text-neutral-100 max-w-xs truncate">
                 {{ libro.titulo }}
               </td>
-              <td class="px-6 py-4 text-neutral-500 dark:text-neutral-400">
+              <td class="px-6 py-4 text-neutral-500 dark:text-neutral-400 max-w-[160px] truncate">
                 {{ libro.autor }}
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
@@ -51,11 +51,12 @@
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-3">
                 <a :href="`/libros/${libro.id}/edit`" class="text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300 transition-colors font-semibold">
-                 Editar</a>
+                  Editar
+                </a>
                 <button @click="eliminar(libro.id)" class="text-red-600 dark:text-red-400 hover:text-red-500 dark:hover:text-red-300 transition-colors font-semibold">
-                 Eliminar
+                  Eliminar
                 </button>
-            </td>
+              </td>
             </tr>
             <tr v-if="libros.length === 0">
               <td colspan="6" class="px-6 py-12 text-center text-neutral-400 dark:text-neutral-500">
