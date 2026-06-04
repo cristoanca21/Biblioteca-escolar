@@ -70,7 +70,7 @@ const form = useForm({
 });
 
 const actualizar = () => {
-  // Nota: Para enviar archivos mediante un formulario de edición, Laravel exige simular un método PUT usando un POST convencional. 
+
   router.post(`/libros/${props.libro.id}`, {
     _method: 'PUT',
     titulo: form.titulo,

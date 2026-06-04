@@ -44,7 +44,6 @@
 </template>
 
 <script setup>
-// Definimos las propiedades para recibir los contadores del backend
 defineProps({
   totalLibros: Number,
   totalCategorias: Number

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
 
 class LibroController extends Controller
 {
-    // 1. Mostrar lista de libros
+    //Mostrar lista de libros
     public function index()
     {
         $libros = Libro::with('categoria')->get()->map(function ($libro) {
@@ -20,7 +20,6 @@ class LibroController extends Controller
                 'autor'     => $libro->autor,
                 'anio'      => $libro->año, 
                 'categoria' => $libro->categoria,
-                // CORRECCIÓN: Si ya guardamos con 'storage/', jalamos la URL limpia directamente
                 'portada'   => $libro->portada ? asset($libro->portada) : null,
             ];
         });
@@ -30,7 +29,7 @@ class LibroController extends Controller
         ]);
     }
 
-    // 2. Formulario de creación
+    //Formulario de creación
     public function create()
     {
         return Inertia::render('Libros/Create', [
@@ -38,7 +37,7 @@ class LibroController extends Controller
         ]);
     }
 
-    // 3. Guardar Libro
+    //Guardar Libro
     public function store(Request $request)
     {
         $request->validate([
@@ -59,13 +58,13 @@ class LibroController extends Controller
             'titulo'       => $request->titulo,
             'autor'        => $request->autor,
             'año'          => $request->anio, 
-            'portada'      => $path ? 'storage/' . $path : null, // Guarda: storage/portadas/archivo.jpg
+            'portada'      => $path ? 'storage/' . $path : null,
         ]);
 
         return redirect()->route('libros.index');
     }
 
-    // 4. Formulario de Edición (¡Aquí está el Actualizar - Vista!)
+    //Formulario de Edición
     public function edit(Libro $libro)
     {
         return Inertia::render('Libros/Edit', [
@@ -73,7 +72,7 @@ class LibroController extends Controller
                 'id'           => $libro->id,
                 'titulo'       => $libro->titulo,
                 'autor'        => $libro->autor,
-                'anio'         => $libro->año, // Mapeamos de 'año' a 'anio' para el formulario Vue
+                'anio'         => $libro->año, 
                 'categoria_id' => $libro->categoria_id,
                 'portada'      => $libro->portada ? asset($libro->portada) : null,
             ],
@@ -81,7 +80,7 @@ class LibroController extends Controller
         ]);
     }
 
-    // 5. Procesar la Actualización (¡Aquí está el Actualizar - Lógica!)
+    //Procesar la Actualización
     public function update(Request $request, Libro $libro)
     {
         $request->validate([
@@ -100,11 +99,9 @@ class LibroController extends Controller
         ];
 
         if ($request->hasFile('portada')) {
-            // Eliminamos la portada vieja si existía para no llenar el disco de basura
             if ($libro->portada) {
                 Storage::disk('public')->delete(str_replace('storage/', '', $libro->portada));
             }
-            // Guardamos la nueva
             $path = $request->file('portada')->store('portadas', 'public');
             $datos['portada'] = 'storage/' . $path;
         }
@@ -114,7 +111,7 @@ class LibroController extends Controller
         return redirect()->route('libros.index');
     }
 
-    // 6. Eliminar libro
+    //Eliminar libro
     public function destroy(Libro $libro)
     {
         if ($libro->portada) {
