@@ -12,11 +12,11 @@
 
     <div class="overflow-hidden bg-white dark:bg-neutral-900/50 border border-neutral-200 dark:border-neutral-800 rounded-xl shadow-sm">
       <div class="overflow-x-auto">
-        <table class="w-full border-collapse text-left text-sm">
+        <table class="w-full min-w-[600px] border-collapse text-left text-sm">
           <thead>
             <tr class="border-b border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400 font-semibold">
               <th scope="col" class="px-6 py-4 w-20">ID</th>
-              <th scope="col" class="px-6 py-4">Nombre de la Categoría</th>
+              <th scope="col" class="px-6 py-4 w-1/3">Nombre de la Categoría</th>
               <th scope="col" class="px-6 py-4">Descripción</th>
             </tr>
           </thead>
